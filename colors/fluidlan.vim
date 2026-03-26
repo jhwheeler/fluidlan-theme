@@ -1,6 +1,6 @@
 " Vim color file
 " Author: Jackson Holiday Wheeler
-" URL: https://github.com/jhwheeler/fluidlan-vim
+" URL: https://github.com/jhwheeler/fluidlan-theme
 " Generated from palette.json — do not edit by hand.
 " Run: python3 generate.py
 

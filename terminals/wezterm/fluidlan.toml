@@ -3,7 +3,7 @@
 
 [metadata]
 name = "Fluidlan"
-origin_url = "https://github.com/jhwheeler/fluidlan-vim"
+origin_url = "https://github.com/jhwheeler/fluidlan-theme"
 
 [colors]
 foreground = "#b4b7bd"

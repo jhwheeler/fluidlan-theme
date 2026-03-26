@@ -117,7 +117,7 @@ class ThemeGenerator:
         lines = [
             '" Vim color file',
             '" Author: Jackson Holiday Wheeler',
-            '" URL: https://github.com/jhwheeler/fluidlan-vim',
+            '" URL: https://github.com/jhwheeler/fluidlan-theme',
             '" Generated from palette.json — do not edit by hand.',
             '" Run: python3 generate.py', '',
             'if has("nvim")', '  lua require("fluidlan").load()', '  finish',
@@ -528,7 +528,7 @@ class ThemeGenerator:
             '# Fluidlan Dark — WezTerm theme',
             '# Generated from palette.json — do not edit by hand.', '',
             '[metadata]', 'name = "Fluidlan"',
-            'origin_url = "https://github.com/jhwheeler/fluidlan-vim"', '',
+            'origin_url = "https://github.com/jhwheeler/fluidlan-theme"', '',
             '[colors]',
             f'foreground = "{fg["base"]}"', f'background = "{bg["base"]}"',
             f'cursor_bg = "{ui["cursor"]}"', f'cursor_fg = "{bg["base"]}"',
