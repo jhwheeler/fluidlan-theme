@@ -544,6 +544,50 @@ class ThemeGenerator:
         lines.append('')
         self.write(f"terminals/kitty/fluidlan{self.suffix}.conf", "\n".join(lines) + "\n")
 
+    def tmux(self):
+        bg, fg, ui, s, st, d = self.bg, self.fg, self.ui, self.s, self.st, self.d
+        lines = [
+            f'# {self.label} — tmux theme',
+            '# Generated from palette.json — do not edit by hand.',
+            '# Run: source-file /path/to/fluidlan.conf', '',
+            '# Core bar',
+            f'set -g status-style "bg={st["bg"]},fg={st["fg"]}"',
+            f'set -g status-interval 1',
+            f'set -g status-left-length 80',
+            f'set -g status-right-length 120',
+            f'set -g status-left "#[fg={s["keyword"]}]Sessions: #(~/.tmux/scripts/sessions.sh)#[fg={fg["muted"]}]│ #[fg={s["keyword"]}]Windows: "',
+            'set -g status-left-length 60',
+            f'set -g status-right "#[fg={s["function"]}]%H:%M:%S #[fg={d["error"]}]W%V #[fg={s["keyword"]}]%a %Y-%m-%d"',
+            '',
+            '# Window styles',
+            f'set -g window-status-current-format " #I:#W "',
+            f'set -g window-status-current-style "fg={s["function"]},bold"',
+            f'set -g window-status-format " #I:#W "',
+            f'set -g window-status-style "fg={st["nc_fg"]}"',
+            f'set -g window-status-activity-style "fg={d["warning"]},bg={bg["base"]},bold"',
+            f'set -g window-status-bell-style "fg={d["error"]},bg={bg["base"]},bold"',
+            'set -g window-status-separator ""',
+            '',
+            '# Pane / copy / popup styles',
+            f'set -g pane-border-style "fg={bg["muted"]}"',
+            f'set -g pane-active-border-style "fg={s["function"]}"',
+            f'set -g display-panes-colour "{s["keyword"]}"',
+            f'set -g display-panes-active-colour "{ui["cursor"]}"',
+            f'set -g copy-mode-match-style "bg={s["keyword"]},fg={bg["base"]},bold"',
+            f'set -g copy-mode-current-match-style "bg={s["string"]},fg={bg["base"]},bold"',
+            f'set -g copy-mode-mark-style "bg={d["error"]},fg={bg["base"]}"',
+            '',
+            '# Command and mode styles',
+            f'set -g message-style "bg={ui["search"]},fg={bg["base"]}"',
+            f'set -g message-command-style "bg={ui["cursor"]},fg={bg["base"]}"',
+            f'set -g mode-style "bg={s["keyword"]},fg={bg["base"]}"',
+            '',
+            '# Misc',
+            f'set -g clock-mode-colour "{s["keyword"]}"',
+            ''
+        ]
+        self.write(f"terminals/tmux/fluidlan{self.suffix}.conf", "\n".join(lines) + "\n")
+
     def wezterm(self):
         bg, fg, ui, st = self.bg, self.fg, self.ui, self.st
         n = ", ".join(f'"{c}"' for c in self.ansi_normal)
@@ -616,6 +660,7 @@ class ThemeGenerator:
         self.zed()
         self.alacritty()
         self.kitty()
+        self.tmux()
         self.wezterm()
         self.windows_terminal()
         self.ghostty()
