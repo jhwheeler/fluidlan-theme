@@ -28,7 +28,7 @@
 "ui.menu" = { fg = "#9a9aba", bg = "#292b2e" }
 "ui.menu.selected" = { fg = "#c6c6c6", bg = "#875faf" }
 "ui.menu.scroll" = { fg = "#a478d4", bg = "#303030" }
-"ui.selection" = { bg = "#3a3a3a" }
+"ui.selection" = { bg = "#444060" }
 "ui.selection.primary" = { bg = "#544a65" }
 "ui.window" = "#303030"
 "ui.help" = { fg = "#b4b7bd", bg = "#292b2e" }

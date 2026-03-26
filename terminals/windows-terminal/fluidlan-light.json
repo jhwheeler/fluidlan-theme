@@ -1,0 +1,23 @@
+{
+  "name": "Fluidlan Light",
+  "background": "#dcd8d0",
+  "foreground": "#252028",
+  "cursorColor": "#6838a0",
+  "selectionBackground": "#b0a8d0",
+  "black": "#dcd8d0",
+  "red": "#c81a16",
+  "green": "#008050",
+  "yellow": "#488820",
+  "blue": "#2b6cb3",
+  "purple": "#8b3a94",
+  "cyan": "#1a7a84",
+  "white": "#3b3945",
+  "brightBlack": "#c5b8ce",
+  "brightRed": "#b52050",
+  "brightGreen": "#20a070",
+  "brightYellow": "#589028",
+  "brightBlue": "#3d6cc0",
+  "brightPurple": "#9930b8",
+  "brightCyan": "#2e8a7e",
+  "brightWhite": "#1e1c24"
+}

@@ -7,7 +7,7 @@ foreground = #b4b7bd
 cursor-color = #cfc070
 cursor-text = #212026
 
-selection-background = #3a3a3a
+selection-background = #444060
 selection-foreground = #b4b7bd
 
 palette = 0=#212026

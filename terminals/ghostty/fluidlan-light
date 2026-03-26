@@ -1,0 +1,29 @@
+# Fluidlan Light — Ghostty theme
+# Generated from palette.json — do not edit by hand.
+
+background = #dcd8d0
+foreground = #252028
+
+cursor-color = #6838a0
+cursor-text = #dcd8d0
+
+selection-background = #b0a8d0
+selection-foreground = #252028
+
+palette = 0=#dcd8d0
+palette = 1=#c81a16
+palette = 2=#008050
+palette = 3=#488820
+palette = 4=#2b6cb3
+palette = 5=#8b3a94
+palette = 6=#1a7a84
+palette = 7=#3b3945
+palette = 8=#c5b8ce
+palette = 9=#b52050
+palette = 10=#20a070
+palette = 11=#589028
+palette = 12=#3d6cc0
+palette = 13=#9930b8
+palette = 14=#2e8a7e
+palette = 15=#1e1c24
+

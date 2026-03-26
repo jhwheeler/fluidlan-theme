@@ -1,0 +1,48 @@
+# Fluidlan Light — Alacritty theme
+# Generated from palette.json — do not edit by hand.
+
+[colors.primary]
+background = "#dcd8d0"
+foreground = "#252028"
+bright_foreground = "#1e1c24"
+
+[colors.cursor]
+text = "#dcd8d0"
+cursor = "#6838a0"
+
+[colors.vi_mode_cursor]
+text = "#dcd8d0"
+cursor = "#6838a0"
+
+[colors.search.matches]
+foreground = "#dcd8d0"
+background = "#2b78c0"
+
+[colors.search.focused_match]
+foreground = "#dcd8d0"
+background = "#008050"
+
+[colors.selection]
+text = "CellForeground"
+background = "#b0a8d0"
+
+[colors.normal]
+black = "#dcd8d0"
+red = "#c81a16"
+green = "#008050"
+yellow = "#488820"
+blue = "#2b6cb3"
+magenta = "#8b3a94"
+cyan = "#1a7a84"
+white = "#3b3945"
+
+[colors.bright]
+black = "#c5b8ce"
+red = "#b52050"
+green = "#20a070"
+yellow = "#589028"
+blue = "#3d6cc0"
+magenta = "#9930b8"
+cyan = "#2e8a7e"
+white = "#1e1c24"
+

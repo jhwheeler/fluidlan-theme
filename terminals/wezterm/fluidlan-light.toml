@@ -1,0 +1,38 @@
+# Fluidlan Light — WezTerm theme
+# Generated from palette.json — do not edit by hand.
+
+[metadata]
+name = "Fluidlan Light"
+origin_url = "https://github.com/jhwheeler/fluidlan-theme"
+
+[colors]
+foreground = "#252028"
+background = "#dcd8d0"
+cursor_bg = "#6838a0"
+cursor_fg = "#dcd8d0"
+cursor_border = "#6838a0"
+selection_fg = "none"
+selection_bg = "#b0a8d0"
+scrollbar_thumb = "#aea4b8"
+split = "#ccc8c0"
+compose_cursor = "#6838a0"
+
+ansi = ["#dcd8d0", "#c81a16", "#008050", "#488820", "#2b6cb3", "#8b3a94", "#1a7a84", "#3b3945"]
+brights = ["#c5b8ce", "#b52050", "#20a070", "#589028", "#3d6cc0", "#9930b8", "#2e8a7e", "#1e1c24"]
+
+[colors.tab_bar]
+background = "#d4d0c8"
+inactive_tab_edge = "#c4c0b8"
+
+[colors.tab_bar.active_tab]
+bg_color = "#c4c0b8"
+fg_color = "#7c48b0"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#d4d0c8"
+fg_color = "#9990a8"
+
+[colors.tab_bar.new_tab]
+bg_color = "#dcd8d0"
+fg_color = "#252028"
+

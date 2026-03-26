@@ -11,9 +11,12 @@ class ThemeGenerator:
     ROOT = os.path.dirname(os.path.abspath(__file__))
     ANSI_NAMES = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]
 
-    def __init__(self):
+    def __init__(self, variant="dark"):
         with open(os.path.join(self.ROOT, "palette.json")) as f:
-            self.p = json.load(f)
+            full = json.load(f)
+        self.name = full["name"]
+        self.variant = variant
+        self.p = full[variant]
         self.bg = self.p["bg"]
         self.fg = self.p["fg"]
         self.s = self.p["syntax"]
@@ -26,6 +29,20 @@ class ThemeGenerator:
         self.t = self.p["terminal"]
         self.g = self.p["gray"]
         self.x = self.p["extra"]
+
+    @property
+    def suffix(self):
+        """File name suffix for non-default variants."""
+        return "" if self.variant == "dark" else f"-{self.variant}"
+
+    @property
+    def label(self):
+        """Human-readable variant label."""
+        return f"{self.name} {'Dark' if self.variant == 'dark' else 'Light'}"
+
+    @property
+    def is_dark(self):
+        return self.variant == "dark"
 
     # -- helpers -------------------------------------------------------------
 
@@ -91,6 +108,7 @@ class ThemeGenerator:
             "slate_blue": x["slate_blue"], "maroon": x["maroon"],
             "purple_param": x["purple_param"], "pale_lavender": x["pale_lavender"],
             "icy_blue": x["icy_blue"],
+            "selection": ui["selection"],
             "linenr_fg": ui["linenr"], "nontext": ui["nontext"],
             "ignore": fg["invisible"], "specialkey": ui["nontext"],
             "wildmenu_fg": ui["wildmenu"],
@@ -98,14 +116,15 @@ class ThemeGenerator:
         }
 
         lines = [
-            "-- Generated from palette.json — do not edit by hand.",
+            f"-- Generated from palette.json ({self.variant}) — do not edit by hand.",
             "-- Run: python3 generate.py",
             "local M = {}", "",
         ]
         for key, val in m.items():
             lines.append(f"M.{key} = '{val}'")
         lines += ["", "return M", ""]
-        self.write("lua/fluidlan/palette.lua", "\n".join(lines))
+        fname = "palette" if self.is_dark else "palette_light"
+        self.write(f"lua/fluidlan/{fname}.lua", "\n".join(lines))
 
     # -- vim -----------------------------------------------------------------
 
@@ -114,17 +133,22 @@ class ThemeGenerator:
         s, bg, fg, d = self.s, self.bg, self.fg, self.d
         df, y, ui, st, h = self.df, self.y, self.ui, self.st, self.h
 
+        bg_mode = "dark" if self.is_dark else "light"
+        nvim_cmd = 'require("fluidlan").load()' if self.is_dark else 'require("fluidlan").load_light()'
+        colorscheme_name = "fluidlan" if self.is_dark else "fluidlan-light"
         lines = [
             '" Vim color file',
             '" Author: Jackson Holiday Wheeler',
             '" URL: https://github.com/jhwheeler/fluidlan-theme',
-            '" Generated from palette.json — do not edit by hand.',
+            f'" Generated from palette.json ({self.variant}) — do not edit by hand.',
             '" Run: python3 generate.py', '',
-            'if has("nvim")', '  lua require("fluidlan").load()', '  finish',
+            'if has("nvim")',
+            f'  lua {nvim_cmd}',
+            '  finish',
             'endif', '',
-            'set background=dark', 'hi clear',
+            f'set background={bg_mode}', 'hi clear',
             'if exists("syntax_on")', '  syntax reset', 'endif',
-            'let g:colors_name = "fluidlan"', '',
+            f'let g:colors_name = "{colorscheme_name}"', '',
             '" Editor UI',
             hi("Normal", fg["base"], "NONE"),
             hi("Cursor", bg["raised"], ui["cursor"], "bold"),
@@ -238,7 +262,7 @@ class ThemeGenerator:
             '  hi link ALEErrorSign Error',
             '  hi link ALEWarningSign Warning',
         ]
-        self.write("colors/fluidlan.vim", "\n".join(lines) + "\n")
+        self.write(f"colors/fluidlan{self.suffix}.vim", "\n".join(lines) + "\n")
 
     # -- helix ---------------------------------------------------------------
 
@@ -247,7 +271,7 @@ class ThemeGenerator:
         df, y, ui, st, h = self.df, self.y, self.ui, self.st, self.h
 
         lines = [
-            '# Fluidlan Dark — Helix theme',
+            f'# {self.label} — Helix theme',
             '# Generated from palette.json — do not edit by hand.', '',
             '# UI',
             f'"ui.background" = {{ bg = "{bg["base"]}" }}',
@@ -358,7 +382,7 @@ class ThemeGenerator:
             f'"markup.link.text" = {{ fg = "{s["function"]}", modifiers = ["underlined"] }}',
             f'"markup.quote" = {{ fg = "{s["comment"]}", modifiers = ["italic"] }}',
         ]
-        self.write("editors/helix/fluidlan.toml", "\n".join(lines) + "\n")
+        self.write(f"editors/helix/fluidlan{self.suffix}.toml", "\n".join(lines) + "\n")
 
     # -- zed -----------------------------------------------------------------
 
@@ -371,7 +395,7 @@ class ThemeGenerator:
             "$schema": "https://zed.dev/schema/themes/v0.2.0.json",
             "name": "Fluidlan", "author": "Jackson Holiday Wheeler",
             "themes": [{
-                "name": "Fluidlan Dark", "appearance": "dark",
+                "name": self.label, "appearance": self.variant,
                 "style": {
                     "background": bg["base"],
                     "surface.background": bg["raised"],
@@ -465,14 +489,14 @@ class ThemeGenerator:
                 },
             }],
         }
-        self.write("editors/zed/fluidlan.json", json.dumps(theme, indent=2) + "\n")
+        self.write(f"editors/zed/fluidlan{self.suffix}.json", json.dumps(theme, indent=2) + "\n")
 
     # -- terminals -----------------------------------------------------------
 
     def alacritty(self):
         bg, fg, ui, s = self.bg, self.fg, self.ui, self.s
         lines = [
-            '# Fluidlan Dark — Alacritty theme',
+            f'# {self.label} — Alacritty theme',
             '# Generated from palette.json — do not edit by hand.', '',
             '[colors.primary]',
             f'background = "{bg["base"]}"', f'foreground = "{fg["base"]}"',
@@ -495,12 +519,12 @@ class ThemeGenerator:
         for n, c in zip(self.ANSI_NAMES, self.ansi_bright):
             lines.append(f'{n} = "{c}"')
         lines.append('')
-        self.write("terminals/alacritty/fluidlan.toml", "\n".join(lines) + "\n")
+        self.write(f"terminals/alacritty/fluidlan{self.suffix}.toml", "\n".join(lines) + "\n")
 
     def kitty(self):
         bg, fg, ui, s, st = self.bg, self.fg, self.ui, self.s, self.st
         lines = [
-            '# Fluidlan Dark — Kitty theme',
+            f'# {self.label} — Kitty theme',
             '# Generated from palette.json — do not edit by hand.', '',
             f'foreground {fg["base"]}', f'background {bg["base"]}', '',
             f'cursor {ui["cursor"]}', f'cursor_text_color {bg["base"]}', '',
@@ -518,16 +542,16 @@ class ThemeGenerator:
         for i, c in enumerate(self.ansi_normal + self.ansi_bright):
             lines.append(f'color{i} {c}')
         lines.append('')
-        self.write("terminals/kitty/fluidlan.conf", "\n".join(lines) + "\n")
+        self.write(f"terminals/kitty/fluidlan{self.suffix}.conf", "\n".join(lines) + "\n")
 
     def wezterm(self):
         bg, fg, ui, st = self.bg, self.fg, self.ui, self.st
         n = ", ".join(f'"{c}"' for c in self.ansi_normal)
         b = ", ".join(f'"{c}"' for c in self.ansi_bright)
         lines = [
-            '# Fluidlan Dark — WezTerm theme',
+            f'# {self.label} — WezTerm theme',
             '# Generated from palette.json — do not edit by hand.', '',
-            '[metadata]', 'name = "Fluidlan"',
+            '[metadata]', f'name = "{self.label}"',
             'origin_url = "https://github.com/jhwheeler/fluidlan-theme"', '',
             '[colors]',
             f'foreground = "{fg["base"]}"', f'background = "{bg["base"]}"',
@@ -547,13 +571,13 @@ class ThemeGenerator:
             '[colors.tab_bar.new_tab]',
             f'bg_color = "{bg["base"]}"', f'fg_color = "{fg["base"]}"', '',
         ]
-        self.write("terminals/wezterm/fluidlan.toml", "\n".join(lines) + "\n")
+        self.write(f"terminals/wezterm/fluidlan{self.suffix}.toml", "\n".join(lines) + "\n")
 
     def windows_terminal(self):
         bg, fg, ui = self.bg, self.fg, self.ui
         normal, bright = self.ansi_normal, self.ansi_bright
         scheme = {
-            "name": "Fluidlan",
+            "name": self.label,
             "background": bg["base"], "foreground": fg["base"],
             "cursorColor": ui["cursor"], "selectionBackground": ui["selection"],
             "black": normal[0], "red": normal[1], "green": normal[2],
@@ -564,13 +588,13 @@ class ThemeGenerator:
             "brightBlue": bright[4], "brightPurple": bright[5],
             "brightCyan": bright[6], "brightWhite": bright[7],
         }
-        self.write("terminals/windows-terminal/fluidlan.json",
+        self.write(f"terminals/windows-terminal/fluidlan{self.suffix}.json",
                     json.dumps(scheme, indent=2) + "\n")
 
     def ghostty(self):
         bg, fg, ui = self.bg, self.fg, self.ui
         lines = [
-            '# Fluidlan Dark — Ghostty theme',
+            f'# {self.label} — Ghostty theme',
             '# Generated from palette.json — do not edit by hand.', '',
             f'background = {bg["base"]}', f'foreground = {fg["base"]}', '',
             f'cursor-color = {ui["cursor"]}', f'cursor-text = {bg["base"]}', '',
@@ -580,7 +604,7 @@ class ThemeGenerator:
         for i, c in enumerate(self.ansi_normal + self.ansi_bright):
             lines.append(f'palette = {i}={c}')
         lines.append('')
-        self.write("terminals/ghostty/fluidlan", "\n".join(lines) + "\n")
+        self.write(f"terminals/ghostty/fluidlan{self.suffix}", "\n".join(lines) + "\n")
 
     # -- run all -------------------------------------------------------------
 
@@ -599,4 +623,5 @@ class ThemeGenerator:
 
 
 if __name__ == "__main__":
-    ThemeGenerator().generate_all()
+    for variant in ("dark", "light"):
+        ThemeGenerator(variant).generate_all()

@@ -1,7 +1,7 @@
 " Vim color file
 " Author: Jackson Holiday Wheeler
 " URL: https://github.com/jhwheeler/fluidlan-theme
-" Generated from palette.json — do not edit by hand.
+" Generated from palette.json (dark) — do not edit by hand.
 " Run: python3 generate.py
 
 if has("nvim")
@@ -31,7 +31,7 @@ let g:colors_name = "fluidlan"
   hi TabLine guifg=#5f8787 guibg=#3a3a3a gui=NONE
   hi TabLineSel guifg=#cfc070 guibg=#544a65 gui=NONE
   hi TabLineFill guifg=#afafaf guibg=#34323e gui=NONE
-  hi WildMenu guifg=#cfc070 guibg=#3a3a3a gui=NONE
+  hi WildMenu guifg=#5f87af guibg=#3a3a3a gui=NONE
   hi Pmenu guifg=#9a9aba guibg=#292b2e gui=NONE
   hi PmenuSel guifg=#c6c6c6 guibg=#875faf gui=NONE
   hi PmenuSbar guifg=#a478d4 guibg=#303030 gui=NONE
@@ -45,8 +45,8 @@ let g:colors_name = "fluidlan"
   hi ModeMsg guifg=#2aa1ae gui=NONE
   hi MoreMsg guifg=#2aa1ae gui=NONE
   hi Question guifg=#d5c888 gui=NONE
-  hi Visual guibg=#3a3a3a gui=NONE
-  hi VisualNOS guibg=#3a3a3a gui=NONE
+  hi Visual guibg=#444060 gui=NONE
+  hi VisualNOS guibg=#444060 gui=NONE
   hi NonText guifg=#605872 gui=NONE
   hi Todo guifg=#c6b660 gui=bold
   hi Warning guifg=#c9b068 gui=bold

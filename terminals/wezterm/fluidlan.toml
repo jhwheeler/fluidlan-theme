@@ -2,7 +2,7 @@
 # Generated from palette.json — do not edit by hand.
 
 [metadata]
-name = "Fluidlan"
+name = "Fluidlan Dark"
 origin_url = "https://github.com/jhwheeler/fluidlan-theme"
 
 [colors]
@@ -12,7 +12,7 @@ cursor_bg = "#cfc070"
 cursor_fg = "#212026"
 cursor_border = "#cfc070"
 selection_fg = "none"
-selection_bg = "#3a3a3a"
+selection_bg = "#444060"
 scrollbar_thumb = "#544a65"
 split = "#303030"
 compose_cursor = "#cfc070"

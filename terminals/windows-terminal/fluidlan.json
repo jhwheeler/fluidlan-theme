@@ -1,9 +1,9 @@
 {
-  "name": "Fluidlan",
+  "name": "Fluidlan Dark",
   "background": "#212026",
   "foreground": "#b4b7bd",
   "cursorColor": "#cfc070",
-  "selectionBackground": "#3a3a3a",
+  "selectionBackground": "#444060",
   "black": "#212026",
   "red": "#e0211d",
   "green": "#20af81",

@@ -8,8 +8,8 @@ function M.setup(p)
   ---------------------------------------------------------------------------
   -- Editor UI
   ---------------------------------------------------------------------------
-  hl('Normal',       { fg = p.fg })
-  hl('NormalNC',     { fg = p.fg })
+  hl('Normal',       { fg = p.fg, bg = p.bg })
+  hl('NormalNC',     { fg = p.fg, bg = p.bg })
   hl('NormalFloat',  { fg = p.fg, bg = p.bg1 })
   hl('FloatBorder',  { fg = p.light_purple, bg = p.bg1 })
   hl('FloatTitle',   { fg = p.purple, bg = p.bg1, bold = true })
@@ -44,15 +44,15 @@ function M.setup(p)
 
   hl('Search',    { fg = p.bg, bg = p.cyan_blue, bold = true })
   hl('IncSearch', { fg = p.white2, bg = p.cyan_blue, bold = true })
-  hl('CurSearch', { fg = p.bg, bg = p.yellow, bold = true })
+  hl('CurSearch', { fg = p.bg, bg = p.aqua, bold = true })
   hl('MatchParen', { fg = p.white2, bold = true, underline = true })
 
   hl('ModeMsg',  { fg = p.teal })
   hl('MoreMsg',  { fg = p.teal })
   hl('Question', { fg = p.bright_yellow })
 
-  hl('Visual',    { bg = p.bg4 })
-  hl('VisualNOS', { bg = p.bg4 })
+  hl('Visual',    { bg = p.selection })
+  hl('VisualNOS', { bg = p.selection })
 
   hl('NonText',    { fg = p.nontext })
   hl('Whitespace', { fg = p.nontext })

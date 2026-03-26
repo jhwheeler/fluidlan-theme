@@ -1,4 +1,4 @@
--- Generated from palette.json — do not edit by hand.
+-- Generated from palette.json (dark) — do not edit by hand.
 -- Run: python3 generate.py
 local M = {}
 
@@ -70,11 +70,12 @@ M.maroon = '#800080'
 M.purple_param = '#afafff'
 M.pale_lavender = '#d7afff'
 M.icy_blue = '#d7ffff'
+M.selection = '#444060'
 M.linenr_fg = '#716882'
 M.nontext = '#605872'
 M.ignore = '#44404e'
 M.specialkey = '#605872'
-M.wildmenu_fg = '#cfc070'
+M.wildmenu_fg = '#5f87af'
 M.none = 'NONE'
 
 return M
