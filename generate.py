@@ -176,7 +176,7 @@ class ThemeGenerator:
             hi("IncSearch", fg["bright"], ui["search"], "bold"),
             hi("MatchParen", fg["bright"], "", "bold,underline"),
             hi("ModeMsg", s["comment"]), hi("MoreMsg", s["comment"]),
-            hi("Question", y["bright"]),
+            hi("Question", p["light_purple"]),
             hi("Visual", "", ui["selection"]),
             hi("VisualNOS", "", ui["selection"]),
             hi("NonText", ui["nontext"]),

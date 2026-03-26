@@ -49,7 +49,7 @@ function M.setup(p)
 
   hl('ModeMsg',  { fg = p.teal })
   hl('MoreMsg',  { fg = p.teal })
-  hl('Question', { fg = p.bright_yellow })
+  hl('Question', { fg = p.light_purple })
 
   hl('Visual',    { bg = p.selection })
   hl('VisualNOS', { bg = p.selection })
