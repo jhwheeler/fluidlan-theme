@@ -546,6 +546,7 @@ class ThemeGenerator:
 
     def tmux(self):
         bg, fg, ui, s, st, d = self.bg, self.fg, self.ui, self.s, self.st, self.d
+        non_selected_fg = fg["white"] if self.is_dark else st["nc_fg"]
         lines = [
             f'# {self.label} — tmux theme',
             '# Generated from palette.json — do not edit by hand.',
@@ -557,13 +558,13 @@ class ThemeGenerator:
             f'set -g status-right-length 120',
             f'set -g status-left "#[fg={s["keyword"]}]Sessions: #(~/.tmux/scripts/sessions.sh)#[fg={fg["muted"]}]│ #[fg={s["keyword"]}]Windows: "',
             'set -g status-left-length 60',
-            f'set -g status-right "#[fg={s["function"]}]%H:%M:%S #[fg={d["error"]}]W%V #[fg={s["keyword"]}]%a %Y-%m-%d"',
+            f'set -g status-right "#[fg={s["function"]}]%H:%M:%S #[fg={fg["white"]}]W%V #[fg={s["keyword"]}]%a %Y-%m-%d"',
             '',
             '# Window styles',
             f'set -g window-status-current-format " #I:#W "',
             f'set -g window-status-current-style "fg={s["function"]},bold"',
             f'set -g window-status-format " #I:#W "',
-            f'set -g window-status-style "fg={st["nc_fg"]}"',
+            f'set -g window-status-style "fg={non_selected_fg}"',
             f'set -g window-status-activity-style "fg={d["warning"]},bg={bg["base"]},bold"',
             f'set -g window-status-bell-style "fg={d["error"]},bg={bg["base"]},bold"',
             'set -g window-status-separator ""',
