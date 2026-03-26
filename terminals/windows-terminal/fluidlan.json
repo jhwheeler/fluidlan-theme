@@ -1,0 +1,23 @@
+{
+  "name": "Fluidlan",
+  "background": "#212026",
+  "foreground": "#b4b7bd",
+  "cursorColor": "#cfc070",
+  "selectionBackground": "#3a3a3a",
+  "black": "#212026",
+  "red": "#e0211d",
+  "green": "#20af81",
+  "yellow": "#cfc070",
+  "blue": "#4f97d7",
+  "purple": "#bc6ec5",
+  "cyan": "#2aa1ae",
+  "white": "#b4b7bd",
+  "brightBlack": "#544a65",
+  "brightRed": "#ce537a",
+  "brightGreen": "#5cbcac",
+  "brightYellow": "#d5c888",
+  "brightBlue": "#87afff",
+  "brightPurple": "#D881ED",
+  "brightCyan": "#5cbcac",
+  "brightWhite": "#e4e4e4"
+}

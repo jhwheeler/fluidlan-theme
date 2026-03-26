@@ -1,0 +1,48 @@
+# Fluidlan Dark — Alacritty theme
+# Generated from palette.json — do not edit by hand.
+
+[colors.primary]
+background = "#212026"
+foreground = "#b4b7bd"
+bright_foreground = "#e4e4e4"
+
+[colors.cursor]
+text = "#212026"
+cursor = "#cfc070"
+
+[colors.vi_mode_cursor]
+text = "#212026"
+cursor = "#cfc070"
+
+[colors.search.matches]
+foreground = "#212026"
+background = "#0087d7"
+
+[colors.search.focused_match]
+foreground = "#212026"
+background = "#20af81"
+
+[colors.selection]
+text = "CellForeground"
+background = "#3a3a3a"
+
+[colors.normal]
+black = "#212026"
+red = "#e0211d"
+green = "#20af81"
+yellow = "#cfc070"
+blue = "#4f97d7"
+magenta = "#bc6ec5"
+cyan = "#2aa1ae"
+white = "#b4b7bd"
+
+[colors.bright]
+black = "#544a65"
+red = "#ce537a"
+green = "#5cbcac"
+yellow = "#d5c888"
+blue = "#87afff"
+magenta = "#D881ED"
+cyan = "#5cbcac"
+white = "#e4e4e4"
+

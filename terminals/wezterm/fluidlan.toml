@@ -1,0 +1,38 @@
+# Fluidlan Dark — WezTerm theme
+# Generated from palette.json — do not edit by hand.
+
+[metadata]
+name = "Fluidlan"
+origin_url = "https://github.com/jhwheeler/fluidlan-vim"
+
+[colors]
+foreground = "#b4b7bd"
+background = "#212026"
+cursor_bg = "#cfc070"
+cursor_fg = "#212026"
+cursor_border = "#cfc070"
+selection_fg = "none"
+selection_bg = "#3a3a3a"
+scrollbar_thumb = "#544a65"
+split = "#303030"
+compose_cursor = "#cfc070"
+
+ansi = ["#212026", "#e0211d", "#20af81", "#cfc070", "#4f97d7", "#bc6ec5", "#2aa1ae", "#b4b7bd"]
+brights = ["#544a65", "#ce537a", "#5cbcac", "#d5c888", "#87afff", "#D881ED", "#5cbcac", "#e4e4e4"]
+
+[colors.tab_bar]
+background = "#292b2e"
+inactive_tab_edge = "#34323e"
+
+[colors.tab_bar.active_tab]
+bg_color = "#34323e"
+fg_color = "#b888e2"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#292b2e"
+fg_color = "#666666"
+
+[colors.tab_bar.new_tab]
+bg_color = "#212026"
+fg_color = "#b4b7bd"
+

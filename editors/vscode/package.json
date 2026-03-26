@@ -1,0 +1,25 @@
+{
+  "name": "fluidlan",
+  "displayName": "Fluidlan",
+  "description": "A cool-toned dark color theme inspired by spacemacs",
+  "version": "0.1.0",
+  "publisher": "jhwheeler",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhwheeler/fluidlan-vim"
+  },
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": ["Themes"],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Fluidlan Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/fluidlan-dark.json"
+      }
+    ]
+  }
+}
