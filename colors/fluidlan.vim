@@ -44,7 +44,7 @@ let g:colors_name = "fluidlan"
   hi MatchParen guifg=#e4e4e4 gui=bold,underline
   hi ModeMsg guifg=#2aa1ae gui=NONE
   hi MoreMsg guifg=#2aa1ae gui=NONE
-  hi Question guifg=#d5c888 gui=NONE
+  hi Question guifg=#b888e2 gui=NONE
   hi Visual guibg=#444060 gui=NONE
   hi VisualNOS guibg=#444060 gui=NONE
   hi NonText guifg=#605872 gui=NONE

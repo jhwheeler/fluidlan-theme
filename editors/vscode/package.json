@@ -1,7 +1,7 @@
 {
   "name": "fluidlan",
   "displayName": "Fluidlan",
-  "description": "A cool-toned dark color theme inspired by spacemacs",
+  "description": "A cool-toned dark and light color theme inspired by spacemacs",
   "version": "0.1.0",
   "publisher": "jhwheeler",
   "license": "MIT",
@@ -19,6 +19,11 @@
         "label": "Fluidlan Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/fluidlan-dark.json"
+      },
+      {
+        "label": "Fluidlan Light",
+        "uiTheme": "vs",
+        "path": "./themes/fluidlan-light.json"
       }
     ]
   }

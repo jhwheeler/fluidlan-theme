@@ -68,6 +68,50 @@ class ThemeGenerator:
         parts.append(f"gui={style}")
         return "  " + " ".join(parts)
 
+    def _json_scalar(self, value):
+        return json.dumps(value, ensure_ascii=False)
+
+    def _json_compact(self, value, level=0):
+        indent = "  " * level
+        next_indent = "  " * (level + 1)
+
+        if isinstance(value, dict):
+            if not value:
+                return "{}"
+
+            scalar_items = all(not isinstance(v, (dict, list)) for v in value.values())
+            if scalar_items and len(value) <= 3:
+                inner = ", ".join(
+                    f"{self._json_scalar(k)}: {self._json_scalar(v)}"
+                    for k, v in value.items()
+                )
+                if len(inner) <= 120:
+                    return "{ " + inner + " }"
+
+            lines = []
+            for key, item in value.items():
+                rendered = self._json_compact(item, level + 1)
+                lines.append(f"{next_indent}{self._json_scalar(key)}: {rendered}")
+            return "{\n" + ",\n".join(lines) + "\n" + indent + "}"
+
+        if isinstance(value, list):
+            if not value:
+                return "[]"
+
+            if all(not isinstance(item, (dict, list)) for item in value):
+                inner = ", ".join(self._json_scalar(item) for item in value)
+                return "[ " + inner + " ]"
+
+            rendered_items = []
+            for item in value:
+                rendered = self._json_compact(item, level + 1)
+                if "\n" in rendered:
+                    rendered = rendered.replace("\n", "\n" + next_indent)
+                rendered_items.append(f"{next_indent}{rendered}")
+            return "[\n" + ",\n".join(rendered_items) + "\n" + indent + "]"
+
+        return self._json_scalar(value)
+
     # -- lua palette ---------------------------------------------------------
 
     def lua_palette(self):
@@ -176,7 +220,7 @@ class ThemeGenerator:
             hi("IncSearch", fg["bright"], ui["search"], "bold"),
             hi("MatchParen", fg["bright"], "", "bold,underline"),
             hi("ModeMsg", s["comment"]), hi("MoreMsg", s["comment"]),
-            hi("Question", p["light_purple"]),
+            hi("Question", s["macro"]),
             hi("Visual", "", ui["selection"]),
             hi("VisualNOS", "", ui["selection"]),
             hi("NonText", ui["nontext"]),
@@ -489,7 +533,395 @@ class ThemeGenerator:
                 },
             }],
         }
-        self.write(f"editors/zed/fluidlan{self.suffix}.json", json.dumps(theme, indent=2) + "\n")
+        self.write(f"editors/zed/fluidlan{self.suffix}.json", self._json_compact(theme) + "\n")
+
+    # -- vscode -------------------------------------------------------------
+
+    def vscode(self):
+        s, bg, fg, d = self.s, self.bg, self.fg, self.d
+        df, y, ui, st, h = self.df, self.y, self.ui, self.st, self.h
+        normal, bright = self.ansi_normal, self.ansi_bright
+
+        colors = {
+            "editor.background": bg["base"],
+            "editor.foreground": fg["base"],
+            "editor.lineHighlightBackground": bg["surface"],
+            "editor.selectionBackground": ui["selection"],
+            "editor.findMatchBackground": ui["search"] + "44",
+            "editor.findMatchHighlightBackground": ui["search"] + "22",
+            "editor.wordHighlightBackground": bg["overlay"],
+            "editor.wordHighlightStrongBackground": bg["overlay"],
+            "editorCursor.foreground": ui["cursor"],
+            "editorLineNumber.foreground": fg["subtle"],
+            "editorLineNumber.activeForeground": s["function"],
+            "editorIndentGuide.background1": bg["overlay"],
+            "editorIndentGuide.activeBackground1": ui["cursor"],
+            "editorBracketMatch.background": bg["overlay"],
+            "editorBracketMatch.border": fg["bright"],
+            "editorWhitespace.foreground": fg["faint"],
+            "editorWidget.background": bg["raised"],
+            "editorWidget.border": ui["cursor"],
+            "editorSuggestWidget.background": bg["raised"],
+            "editorSuggestWidget.selectedBackground": ui["cursor"],
+            "editorSuggestWidget.highlightForeground": ui["search"],
+            "editorHoverWidget.background": bg["raised"],
+            "editorHoverWidget.border": ui["cursor"],
+            "editorError.foreground": d["error"],
+            "editorWarning.foreground": d["warning"],
+            "editorInfo.foreground": d["info"],
+            "editorGutter.addedBackground": df["added"],
+            "editorGutter.modifiedBackground": df["changed"],
+            "editorGutter.deletedBackground": df["removed"],
+            "diffEditor.insertedTextBackground": df["added"] + "18",
+            "diffEditor.removedTextBackground": df["removed"] + "18",
+            "activityBar.background": bg["base"],
+            "activityBar.foreground": fg["base"],
+            "activityBar.activeBorder": ui["cursor"],
+            "activityBarBadge.background": ui["cursor"],
+            "activityBarBadge.foreground": bg["base"],
+            "sideBar.background": bg["raised"],
+            "sideBar.foreground": fg["base"],
+            "sideBar.border": bg["overlay"],
+            "sideBarTitle.foreground": ui["cursor"],
+            "sideBarSectionHeader.background": bg["overlay"],
+            "sideBarSectionHeader.foreground": ui["cursor"],
+            "statusBar.background": bg["overlay"],
+            "statusBar.foreground": ui["cursor"],
+            "statusBar.debuggingBackground": d["error"],
+            "statusBar.debuggingForeground": fg["bright"],
+            "statusBar.noFolderBackground": bg["overlay"],
+            "titleBar.activeBackground": bg["base"],
+            "titleBar.activeForeground": fg["base"],
+            "titleBar.inactiveBackground": bg["raised"],
+            "titleBar.inactiveForeground": fg["faint"],
+            "tab.activeBackground": bg["base"],
+            "tab.activeForeground": fg["base"],
+            "tab.inactiveBackground": bg["raised"],
+            "tab.inactiveForeground": fg["faint"],
+            "tab.activeBorderTop": ui["cursor"],
+            "tab.border": bg["base"],
+            "editorGroupHeader.tabsBackground": bg["raised"],
+            "panel.background": bg["base"],
+            "panel.border": bg["overlay"],
+            "panelTitle.activeForeground": ui["cursor"],
+            "panelTitle.activeBorder": ui["cursor"],
+            "panelTitle.inactiveForeground": fg["faint"],
+            "terminal.foreground": fg["base"],
+            "terminal.ansiBlack": normal[0],
+            "terminal.ansiRed": normal[1],
+            "terminal.ansiGreen": normal[2],
+            "terminal.ansiYellow": normal[3],
+            "terminal.ansiBlue": normal[4],
+            "terminal.ansiMagenta": normal[5],
+            "terminal.ansiCyan": normal[6],
+            "terminal.ansiWhite": normal[7],
+            "terminal.ansiBrightBlack": bright[0],
+            "terminal.ansiBrightRed": bright[1],
+            "terminal.ansiBrightGreen": bright[2],
+            "terminal.ansiBrightYellow": bright[3],
+            "terminal.ansiBrightBlue": bright[4],
+            "terminal.ansiBrightMagenta": bright[5],
+            "terminal.ansiBrightCyan": bright[6],
+            "terminal.ansiBrightWhite": bright[7],
+            "input.background": bg["raised"],
+            "input.foreground": fg["base"],
+            "input.border": bg["accent"],
+            "input.placeholderForeground": fg["subtle"],
+            "inputOption.activeBorder": ui["cursor"],
+            "dropdown.background": bg["raised"],
+            "dropdown.foreground": fg["base"],
+            "dropdown.border": bg["accent"],
+            "list.activeSelectionBackground": ui["cursor"],
+            "list.activeSelectionForeground": fg["white"],
+            "list.hoverBackground": bg["overlay"],
+            "list.focusBackground": bg["overlay"],
+            "list.inactiveSelectionBackground": bg["overlay"],
+            "list.highlightForeground": ui["search"],
+            "button.background": ui["cursor"],
+            "button.foreground": bg["base"],
+            "button.hoverBackground": y["light"],
+            "badge.background": ui["cursor"],
+            "badge.foreground": bg["base"],
+            "scrollbarSlider.background": bg["accent"] + "50",
+            "scrollbarSlider.hoverBackground": bg["accent"] + "80",
+            "scrollbarSlider.activeBackground": bg["accent"] + "b0",
+            "minimap.selectionHighlight": ui["selection"],
+            "minimap.findMatchHighlight": ui["search"],
+            "breadcrumb.foreground": fg["subtle"],
+            "breadcrumb.focusForeground": fg["base"],
+            "breadcrumb.activeSelectionForeground": ui["cursor"],
+            "gitDecoration.addedResourceForeground": df["added"],
+            "gitDecoration.modifiedResourceForeground": df["changed"],
+            "gitDecoration.deletedResourceForeground": df["removed"],
+            "gitDecoration.untrackedResourceForeground": df["changed"],
+            "gitDecoration.conflictingResourceForeground": df["removed"],
+            "gitDecoration.ignoredResourceForeground": fg["faint"],
+            "peekView.border": ui["cursor"],
+            "peekViewEditor.background": bg["raised"],
+            "peekViewResult.background": bg["raised"],
+            "peekViewTitle.background": bg["overlay"],
+            "peekViewTitleLabel.foreground": ui["cursor"],
+            "peekViewResult.matchHighlightBackground": ui["search"] + "44",
+            "focusBorder": ui["cursor"],
+            "foreground": fg["base"],
+            "selection.background": ui["selection"],
+            "widget.shadow": "#00000044",
+        }
+
+        token_colors = [
+            {
+                "name": "Comment",
+                "scope": ["comment", "punctuation.definition.comment"],
+                "settings": {"foreground": s["comment"], "fontStyle": "italic"},
+            },
+            {
+                "name": "Keyword",
+                "scope": [
+                    "keyword",
+                    "keyword.control",
+                    "keyword.operator.new",
+                    "keyword.operator.expression",
+                    "keyword.operator.logical",
+                    "storage",
+                    "storage.type",
+                    "storage.modifier",
+                ],
+                "settings": {"foreground": s["keyword"], "fontStyle": "bold"},
+            },
+            {
+                "name": "Function",
+                "scope": ["entity.name.function", "support.function", "meta.function-call"],
+                "settings": {"foreground": s["function"], "fontStyle": "bold"},
+            },
+            {
+                "name": "String",
+                "scope": ["string", "string.quoted", "string.template"],
+                "settings": {"foreground": s["string"]},
+            },
+            {
+                "name": "String escape",
+                "scope": ["constant.character.escape"],
+                "settings": {"foreground": s["specialchar"], "fontStyle": "bold"},
+            },
+            {
+                "name": "Number",
+                "scope": ["constant.numeric"],
+                "settings": {"foreground": s["number"]},
+            },
+            {
+                "name": "Boolean",
+                "scope": ["constant.language.boolean"],
+                "settings": {"foreground": s["boolean"]},
+            },
+            {
+                "name": "Constant",
+                "scope": ["constant", "constant.language", "support.constant"],
+                "settings": {"foreground": s["constant"]},
+            },
+            {
+                "name": "Type",
+                "scope": ["entity.name.type", "entity.name.class", "support.type", "support.class"],
+                "settings": {"foreground": s["type"]},
+            },
+            {
+                "name": "Variable",
+                "scope": ["variable", "variable.other"],
+                "settings": {"foreground": fg["base"]},
+            },
+            {
+                "name": "Variable parameter",
+                "scope": ["variable.parameter"],
+                "settings": {"foreground": s["identifier"]},
+            },
+            {
+                "name": "Variable property",
+                "scope": ["variable.other.property", "variable.other.object.property", "support.variable.property"],
+                "settings": {"foreground": s["property"]},
+            },
+            {
+                "name": "Identifier",
+                "scope": ["variable.other.readwrite"],
+                "settings": {"foreground": fg["base"]},
+            },
+            {
+                "name": "Operator",
+                "scope": ["keyword.operator", "keyword.operator.assignment"],
+                "settings": {"foreground": s["operator"]},
+            },
+            {
+                "name": "Punctuation delimiter",
+                "scope": ["punctuation.separator", "punctuation.terminator", "punctuation.accessor"],
+                "settings": {"foreground": s["delimiter"]},
+            },
+            {
+                "name": "Punctuation bracket",
+                "scope": ["punctuation.definition.block", "punctuation.definition.parameters", "punctuation.definition.array", "punctuation.section", "meta.brace"],
+                "settings": {"foreground": s["delimiter"]},
+            },
+            {
+                "name": "Tag",
+                "scope": ["entity.name.tag"],
+                "settings": {"foreground": s["tag"]},
+            },
+            {
+                "name": "Tag attribute",
+                "scope": ["entity.other.attribute-name"],
+                "settings": {"foreground": s["identifier"]},
+            },
+            {
+                "name": "Tag punctuation",
+                "scope": ["punctuation.definition.tag"],
+                "settings": {"foreground": s["exception"]},
+            },
+            {
+                "name": "Label",
+                "scope": ["entity.name.label"],
+                "settings": {"foreground": s["label"]},
+            },
+            {
+                "name": "Define / Macro",
+                "scope": ["entity.name.function.preprocessor", "keyword.control.directive"],
+                "settings": {"foreground": s["define"]},
+            },
+            {
+                "name": "Preprocessor",
+                "scope": ["keyword.control.import", "keyword.control.export", "keyword.control.from", "meta.preprocessor"],
+                "settings": {"foreground": s["preproc"]},
+            },
+            {
+                "name": "Exception",
+                "scope": ["keyword.control.trycatch", "keyword.control.exception"],
+                "settings": {"foreground": s["exception"], "fontStyle": "bold"},
+            },
+            {
+                "name": "Decorator",
+                "scope": ["meta.decorator", "punctuation.decorator"],
+                "settings": {"foreground": s["function"], "fontStyle": "bold"},
+            },
+            {
+                "name": "Module / Namespace",
+                "scope": ["entity.name.namespace", "entity.name.module", "support.module"],
+                "settings": {"foreground": s["precondit"]},
+            },
+            {
+                "name": "Markup heading",
+                "scope": ["markup.heading", "heading.1.markdown", "heading.2.markdown"],
+                "settings": {"foreground": h["h1"], "fontStyle": "bold"},
+            },
+            {
+                "name": "Markup bold",
+                "scope": ["markup.bold"],
+                "settings": {"fontStyle": "bold"},
+            },
+            {
+                "name": "Markup italic",
+                "scope": ["markup.italic"],
+                "settings": {"foreground": s["string"], "fontStyle": "italic"},
+            },
+            {
+                "name": "Markup code",
+                "scope": ["markup.inline.raw", "markup.fenced_code.block"],
+                "settings": {"foreground": s["string"]},
+            },
+            {
+                "name": "Markup link",
+                "scope": ["markup.underline.link"],
+                "settings": {"foreground": s["comment"], "fontStyle": "underline"},
+            },
+            {
+                "name": "Diff added",
+                "scope": ["markup.inserted"],
+                "settings": {"foreground": df["added"]},
+            },
+            {
+                "name": "Diff removed",
+                "scope": ["markup.deleted"],
+                "settings": {"foreground": df["removed"]},
+            },
+            {
+                "name": "Diff changed",
+                "scope": ["markup.changed"],
+                "settings": {"foreground": df["changed"]},
+            },
+            {
+                "name": "CSS property",
+                "scope": ["support.type.property-name.css", "support.type.vendored.property-name.css"],
+                "settings": {"foreground": s["property"]},
+            },
+            {
+                "name": "CSS selector",
+                "scope": ["entity.name.tag.css", "entity.other.attribute-name.class.css", "entity.other.attribute-name.id.css"],
+                "settings": {"foreground": s["keyword"], "fontStyle": "bold"},
+            },
+            {
+                "name": "CSS pseudo",
+                "scope": ["entity.other.attribute-name.pseudo-class.css", "entity.other.attribute-name.pseudo-element.css"],
+                "settings": {"foreground": s["precondit"]},
+            },
+            {
+                "name": "CSS value",
+                "scope": ["support.constant.property-value.css", "support.constant.color.css", "constant.other.color.rgb-value.css"],
+                "settings": {"foreground": s["string"]},
+            },
+            {
+                "name": "JSON key",
+                "scope": ["support.type.property-name.json"],
+                "settings": {"foreground": s["keyword"]},
+            },
+            {
+                "name": "TOML table",
+                "scope": ["entity.name.section.toml", "support.type.property-name.table.toml"],
+                "settings": {"foreground": s["function"], "fontStyle": "bold"},
+            },
+            {
+                "name": "YAML key",
+                "scope": ["entity.name.tag.yaml"],
+                "settings": {"foreground": s["keyword"]},
+            },
+            {
+                "name": "Regex",
+                "scope": ["string.regexp", "keyword.operator.quantifier.regexp", "keyword.control.anchor.regexp"],
+                "settings": {"foreground": s["specialchar"]},
+            },
+            {
+                "name": "Invalid",
+                "scope": ["invalid", "invalid.illegal"],
+                "settings": {"foreground": d["error"], "fontStyle": "bold"},
+            },
+        ]
+
+        semantic_token_colors = {
+            "function": {"foreground": s["function"], "bold": True},
+            "function.declaration": {"foreground": s["function"], "bold": True},
+            "method": {"foreground": s["function"], "bold": True},
+            "variable": fg["base"],
+            "variable.readonly": s["constant"],
+            "parameter": s["identifier"],
+            "property": s["property"],
+            "type": s["type"],
+            "class": s["type"],
+            "interface": s["type"],
+            "enum": s["type"],
+            "enumMember": s["constant"],
+            "namespace": s["precondit"],
+            "keyword": {"foreground": s["keyword"], "bold": True},
+            "comment": {"foreground": s["comment"], "italic": True},
+            "string": s["string"],
+            "number": s["number"],
+            "operator": s["operator"],
+            "decorator": {"foreground": s["function"], "bold": True},
+        }
+
+        theme = {
+            "name": self.label,
+            "type": "dark" if self.is_dark else "light",
+            "colors": colors,
+            "tokenColors": token_colors,
+            "semanticHighlighting": True,
+            "semanticTokenColors": semantic_token_colors,
+        }
+        filename = "fluidlan-dark" if self.is_dark else "fluidlan-light"
+        self.write(f"editors/vscode/themes/{filename}.json", self._json_compact(theme) + "\n")
 
     # -- terminals -----------------------------------------------------------
 
@@ -635,7 +1067,7 @@ class ThemeGenerator:
             "brightCyan": bright[6], "brightWhite": bright[7],
         }
         self.write(f"terminals/windows-terminal/fluidlan{self.suffix}.json",
-                    json.dumps(scheme, indent=2) + "\n")
+                    self._json_compact(scheme) + "\n")
 
     def ghostty(self):
         bg, fg, ui = self.bg, self.fg, self.ui
@@ -660,6 +1092,7 @@ class ThemeGenerator:
         self.vim()
         self.helix()
         self.zed()
+        self.vscode()
         self.alacritty()
         self.kitty()
         self.tmux()

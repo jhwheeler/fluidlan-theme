@@ -82,6 +82,7 @@ set termguicolors
 ### VS Code
 
 Copy `editors/vscode/` and open it with `code --extensionDevelopmentPath=editors/vscode`, or package it with `vsce package`.
+The extension manifest includes both `Fluidlan Dark` and `Fluidlan Light`.
 
 ### Helix
 
@@ -122,6 +123,6 @@ require('lualine').setup {
 
 ## Palette
 
-All colors are defined in [`palette.json`](palette.json) — the single source of truth for both variants. Edit it and run `python3 generate.py` to regenerate all editor and terminal themes.
+All colors are defined in [`palette.json`](palette.json) — the single source of truth for both variants. Edit it and run `python3 generate.py` to regenerate all editor and terminal themes, including VS Code.
 
 The Neovim Lua theme (`lua/fluidlan/theme.lua`) maps palette colors to Neovim-specific highlight groups (Treesitter, LSP, plugins) and is the only hand-maintained file.
