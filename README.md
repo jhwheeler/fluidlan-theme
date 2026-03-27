@@ -84,6 +84,12 @@ set termguicolors
 Copy `editors/vscode/` and open it with `code --extensionDevelopmentPath=editors/vscode`, or package it with `vsce package`.
 The extension manifest includes both `Fluidlan Dark` and `Fluidlan Light`.
 
+### Release
+
+Repo releases are tag-based. Run `scripts/release.sh vX.Y.Z` from a clean working tree to validate the generated themes, create the tag, and push it.
+GitHub Actions then creates the GitHub Release for the tag.
+For Neovim, this is the real-world release path: users pin or install the tagged git revision through their plugin manager.
+
 ### Helix
 
 Copy `editors/helix/fluidlan.toml` (or `fluidlan-light.toml`) to `~/.config/helix/themes/`, then set in `config.toml`:
