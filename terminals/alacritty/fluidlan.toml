@@ -8,11 +8,11 @@ bright_foreground = "#e4e4e4"
 
 [colors.cursor]
 text = "#212026"
-cursor = "#cfc070"
+cursor = "#b888e2"
 
 [colors.vi_mode_cursor]
 text = "#212026"
-cursor = "#cfc070"
+cursor = "#b888e2"
 
 [colors.search.matches]
 foreground = "#212026"

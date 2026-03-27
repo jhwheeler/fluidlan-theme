@@ -8,7 +8,7 @@
 "ui.text.inactive" = "#9a9aba"
 "ui.text.info" = "#4f97d7"
 "ui.text.directory" = { fg = "#5f87af", modifiers = ["bold"] }
-"ui.cursor" = { fg = "#212026", bg = "#cfc070" }
+"ui.cursor" = { fg = "#212026", bg = "#b888e2" }
 "ui.cursor.match" = { fg = "#e4e4e4", modifiers = ["bold", "underlined"] }
 "ui.cursor.insert" = { fg = "#212026", bg = "#20af81" }
 "ui.cursor.select" = { fg = "#212026", bg = "#bc6ec5" }

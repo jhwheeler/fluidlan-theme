@@ -18,7 +18,7 @@ let g:colors_name = "fluidlan"
 
 " Editor UI
   hi Normal guifg=#b4b7bd guibg=NONE gui=NONE
-  hi Cursor guifg=#292b2e guibg=#cfc070 gui=bold
+  hi Cursor guifg=#292b2e guibg=#b888e2 gui=bold
   hi LineNr guifg=#716882 gui=NONE
   hi CursorLine guibg=#303030 gui=NONE
   hi CursorLineNr guifg=#bc6ec5 guibg=#303030 gui=NONE

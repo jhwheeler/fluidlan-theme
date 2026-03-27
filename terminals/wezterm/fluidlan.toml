@@ -8,14 +8,14 @@ origin_url = "https://github.com/jhwheeler/fluidlan-theme"
 [colors]
 foreground = "#b4b7bd"
 background = "#212026"
-cursor_bg = "#cfc070"
+cursor_bg = "#b888e2"
 cursor_fg = "#212026"
-cursor_border = "#cfc070"
+cursor_border = "#b888e2"
 selection_fg = "none"
 selection_bg = "#444060"
 scrollbar_thumb = "#544a65"
 split = "#303030"
-compose_cursor = "#cfc070"
+compose_cursor = "#b888e2"
 
 ansi = ["#212026", "#c44f5c", "#20af81", "#cfc070", "#4f97d7", "#bc6ec5", "#2aa1ae", "#b4b7bd"]
 brights = ["#544a65", "#b56777", "#5cbcac", "#d5c888", "#87afff", "#D881ED", "#5cbcac", "#e4e4e4"]
