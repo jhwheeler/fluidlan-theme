@@ -17,8 +17,8 @@ scrollbar_thumb = "#544a65"
 split = "#303030"
 compose_cursor = "#cfc070"
 
-ansi = ["#212026", "#e0211d", "#20af81", "#cfc070", "#4f97d7", "#bc6ec5", "#2aa1ae", "#b4b7bd"]
-brights = ["#544a65", "#ce537a", "#5cbcac", "#d5c888", "#87afff", "#D881ED", "#5cbcac", "#e4e4e4"]
+ansi = ["#212026", "#c44f5c", "#20af81", "#cfc070", "#4f97d7", "#bc6ec5", "#2aa1ae", "#b4b7bd"]
+brights = ["#544a65", "#b56777", "#5cbcac", "#d5c888", "#87afff", "#D881ED", "#5cbcac", "#e4e4e4"]
 
 [colors.tab_bar]
 background = "#292b2e"

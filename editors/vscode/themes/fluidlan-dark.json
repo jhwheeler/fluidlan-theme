@@ -28,16 +28,16 @@
     "editorHoverWidget.background": "#292b2e",
     "editorHoverWidget.border": "#b888e2",
 
-    "editorError.foreground": "#e0211d",
+    "editorError.foreground": "#c44f5c",
     "editorWarning.foreground": "#c9b068",
     "editorInfo.foreground": "#4f97d7",
 
     "editorGutter.addedBackground": "#20af81",
     "editorGutter.modifiedBackground": "#cfc070",
-    "editorGutter.deletedBackground": "#e0211d",
+    "editorGutter.deletedBackground": "#c44f5c",
 
     "diffEditor.insertedTextBackground": "#20af8118",
-    "diffEditor.removedTextBackground": "#ce537a18",
+    "diffEditor.removedTextBackground": "#b5677718",
 
     "activityBar.background": "#212026",
     "activityBar.foreground": "#b4b7bd",
@@ -54,7 +54,7 @@
 
     "statusBar.background": "#34323e",
     "statusBar.foreground": "#b888e2",
-    "statusBar.debuggingBackground": "#e0211d",
+    "statusBar.debuggingBackground": "#c44f5c",
     "statusBar.debuggingForeground": "#e4e4e4",
     "statusBar.noFolderBackground": "#34323e",
 
@@ -79,7 +79,7 @@
 
     "terminal.foreground": "#b4b7bd",
     "terminal.ansiBlack": "#212026",
-    "terminal.ansiRed": "#e0211d",
+    "terminal.ansiRed": "#c44f5c",
     "terminal.ansiGreen": "#20af81",
     "terminal.ansiYellow": "#cfc070",
     "terminal.ansiBlue": "#4f97d7",
@@ -87,7 +87,7 @@
     "terminal.ansiCyan": "#2aa1ae",
     "terminal.ansiWhite": "#b4b7bd",
     "terminal.ansiBrightBlack": "#544a65",
-    "terminal.ansiBrightRed": "#ce537a",
+    "terminal.ansiBrightRed": "#b56777",
     "terminal.ansiBrightGreen": "#5cbcac",
     "terminal.ansiBrightYellow": "#d5c888",
     "terminal.ansiBrightBlue": "#87afff",
@@ -132,9 +132,9 @@
 
     "gitDecoration.addedResourceForeground": "#20af81",
     "gitDecoration.modifiedResourceForeground": "#cfc070",
-    "gitDecoration.deletedResourceForeground": "#e0211d",
+    "gitDecoration.deletedResourceForeground": "#c44f5c",
     "gitDecoration.untrackedResourceForeground": "#5cbcac",
-    "gitDecoration.conflictingResourceForeground": "#ce537a",
+    "gitDecoration.conflictingResourceForeground": "#b56777",
     "gitDecoration.ignoredResourceForeground": "#605872",
 
     "peekView.border": "#bc6ec5",
@@ -243,7 +243,7 @@
     {
       "name": "Tag punctuation",
       "scope": ["punctuation.definition.tag"],
-      "settings": { "foreground": "#ce537a" }
+      "settings": { "foreground": "#b56777" }
     },
     {
       "name": "Label",
@@ -263,7 +263,7 @@
     {
       "name": "Exception",
       "scope": ["keyword.control.trycatch", "keyword.control.exception"],
-      "settings": { "foreground": "#ce537a", "fontStyle": "bold" }
+      "settings": { "foreground": "#b56777", "fontStyle": "bold" }
     },
     {
       "name": "Decorator",
@@ -308,7 +308,7 @@
     {
       "name": "Diff removed",
       "scope": ["markup.deleted"],
-      "settings": { "foreground": "#ce537a" }
+      "settings": { "foreground": "#b56777" }
     },
     {
       "name": "Diff changed",
@@ -358,7 +358,7 @@
     {
       "name": "Invalid",
       "scope": ["invalid", "invalid.illegal"],
-      "settings": { "foreground": "#e0211d", "fontStyle": "bold" }
+      "settings": { "foreground": "#c44f5c", "fontStyle": "bold" }
     }
   ],
   "semanticHighlighting": true,

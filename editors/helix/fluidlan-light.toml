@@ -40,20 +40,20 @@
 
 # Diagnostics
 "warning" = "#488820"
-"error" = "#c81a16"
+"error" = "#a84a46"
 "info" = "#1050a8"
 "hint" = "#086068"
 "diagnostic.warning" = { underline = { color = "#488820", style = "curl" } }
-"diagnostic.error" = { underline = { color = "#c81a16", style = "curl" } }
+"diagnostic.error" = { underline = { color = "#a84a46", style = "curl" } }
 "diagnostic.info" = { underline = { color = "#1050a8", style = "curl" } }
 "diagnostic.hint" = { underline = { color = "#086068", style = "curl" } }
 
 # Diff
 "diff.plus" = "#008050"
-"diff.minus" = "#a01038"
+"diff.minus" = "#8f4f5f"
 "diff.delta" = "#488820"
 "diff.plus.gutter" = "#008050"
-"diff.minus.gutter" = "#a01038"
+"diff.minus.gutter" = "#8f4f5f"
 "diff.delta.gutter" = "#488820"
 
 # Syntax
@@ -62,7 +62,7 @@
 "keyword.control.repeat" = { fg = "#1050a8", modifiers = ["bold"] }
 "keyword.control.import" = "#801890"
 "keyword.control.return" = { fg = "#1050a8", modifiers = ["bold"] }
-"keyword.control.exception" = { fg = "#a01038", modifiers = ["bold"] }
+"keyword.control.exception" = { fg = "#8f4f5f", modifiers = ["bold"] }
 "keyword.operator" = "#1840b8"
 "keyword.function" = { fg = "#1050a8", modifiers = ["bold"] }
 "keyword.storage" = { fg = "#1050a8", modifiers = ["bold"] }

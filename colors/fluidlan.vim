@@ -35,7 +35,7 @@ let g:colors_name = "fluidlan"
   hi Pmenu guifg=#9a9aba guibg=#292b2e gui=NONE
   hi PmenuSel guifg=#c6c6c6 guibg=#875faf gui=NONE
   hi PmenuSbar guifg=#a478d4 guibg=#303030 gui=NONE
-  hi PmenuThumb guifg=#e0211d guibg=#875faf gui=NONE
+  hi PmenuThumb guifg=#c44f5c guibg=#875faf gui=NONE
   hi SignColumn guifg=#20af81 gui=NONE
   hi FoldColumn guifg=#5f87af guibg=#292b2e gui=NONE
   hi Folded guifg=#af5faf guibg=#292b2e gui=bold
@@ -51,8 +51,8 @@ let g:colors_name = "fluidlan"
   hi Todo guifg=#c6b660 gui=bold
   hi Warning guifg=#c9b068 gui=bold
   hi WarningMsg guifg=#c9b068 gui=bold
-  hi Error guifg=#e0211d gui=bold
-  hi ErrorMsg guifg=#e0211d gui=bold
+  hi Error guifg=#c44f5c gui=bold
+  hi ErrorMsg guifg=#c44f5c gui=bold
 
 " Syntax
   hi Boolean guifg=#a568c8 gui=NONE
@@ -65,7 +65,7 @@ let g:colors_name = "fluidlan"
   hi Debug guifg=#e4b4d0 gui=NONE
   hi Define guifg=#D881ED gui=NONE
   hi Delimiter guifg=#5cbcac gui=NONE
-  hi Exception guifg=#ce537a gui=bold
+  hi Exception guifg=#b56777 gui=bold
   hi Function guifg=#bc6ec5 gui=bold
   hi Identifier guifg=#35b07c gui=NONE
   hi Ignore guifg=#44404e gui=NONE
@@ -90,12 +90,12 @@ let g:colors_name = "fluidlan"
   hi SpecialComment guifg=#65737e gui=NONE
   hi Tag guifg=#ca78e8 gui=NONE
   hi Title guifg=#E697E6 gui=NONE
-  hi SpellBad guifg=#ce537a guibg=#5f0000 gui=undercurl
+  hi SpellBad guifg=#b56777 guibg=#5f0000 gui=undercurl
   hi SpellCap guifg=#87afd7 guibg=#005faf gui=undercurl
   hi SpellLocal guifg=#dadada gui=undercurl
   hi SpellRare guifg=#c2b088 gui=undercurl
   hi diffAdded guifg=#20af81 gui=NONE
-  hi diffRemoved guifg=#ce537a gui=NONE
+  hi diffRemoved guifg=#b56777 gui=NONE
   hi link qfLineNr Type
 
 " Markdown
@@ -136,11 +136,11 @@ let g:colors_name = "fluidlan"
 " Git gutter / Signify
   hi GitGutterAdd guifg=#20af81 gui=NONE
   hi GitGutterChange guifg=#cfc070 gui=NONE
-  hi GitGutterDelete guifg=#e0211d gui=NONE
+  hi GitGutterDelete guifg=#c44f5c gui=NONE
   hi GitGutterChangeDelete guifg=#b888e2 gui=NONE
   hi SignifySignAdd guifg=#20af81 gui=NONE
   hi SignifySignChange guifg=#cfc070 gui=NONE
-  hi SignifySignDelete guifg=#e0211d gui=NONE
+  hi SignifySignDelete guifg=#c44f5c gui=NONE
   hi SignifySignChangeDelete guifg=#b888e2 gui=NONE
 
 " ALE

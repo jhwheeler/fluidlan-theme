@@ -40,20 +40,20 @@
 
 # Diagnostics
 "warning" = "#c9b068"
-"error" = "#e0211d"
+"error" = "#c44f5c"
 "info" = "#4f97d7"
 "hint" = "#2aa1ae"
 "diagnostic.warning" = { underline = { color = "#c9b068", style = "curl" } }
-"diagnostic.error" = { underline = { color = "#e0211d", style = "curl" } }
+"diagnostic.error" = { underline = { color = "#c44f5c", style = "curl" } }
 "diagnostic.info" = { underline = { color = "#4f97d7", style = "curl" } }
 "diagnostic.hint" = { underline = { color = "#2aa1ae", style = "curl" } }
 
 # Diff
 "diff.plus" = "#20af81"
-"diff.minus" = "#ce537a"
+"diff.minus" = "#b56777"
 "diff.delta" = "#cfc070"
 "diff.plus.gutter" = "#20af81"
-"diff.minus.gutter" = "#ce537a"
+"diff.minus.gutter" = "#b56777"
 "diff.delta.gutter" = "#cfc070"
 
 # Syntax
@@ -62,7 +62,7 @@
 "keyword.control.repeat" = { fg = "#4f97d7", modifiers = ["bold"] }
 "keyword.control.import" = "#E697E6"
 "keyword.control.return" = { fg = "#4f97d7", modifiers = ["bold"] }
-"keyword.control.exception" = { fg = "#ce537a", modifiers = ["bold"] }
+"keyword.control.exception" = { fg = "#b56777", modifiers = ["bold"] }
 "keyword.operator" = "#87afff"
 "keyword.function" = { fg = "#4f97d7", modifiers = ["bold"] }
 "keyword.storage" = { fg = "#4f97d7", modifiers = ["bold"] }

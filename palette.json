@@ -38,7 +38,7 @@
       "define":     "#D881ED",
       "preproc":    "#E697E6",
       "precondit":  "#d698fe",
-      "exception":  "#ce537a",
+      "exception":  "#b56777",
       "character":  "#d572a4",
       "float":      "#B7B7FF",
       "special":    "#bc6ec5",
@@ -57,7 +57,7 @@
       "nontext":   "#605872"
     },
     "diagnostic": {
-      "error":   "#e0211d",
+      "error":   "#c44f5c",
       "warning": "#c9b068",
       "info":    "#4f97d7",
       "hint":    "#2aa1ae",
@@ -66,7 +66,7 @@
     "diff": {
       "added":   "#20af81",
       "changed": "#cfc070",
-      "removed": "#ce537a"
+      "removed": "#b56777"
     },
     "yellow": {
       "base":   "#cfc070",
@@ -122,7 +122,7 @@
     },
     "terminal": {
       "black":          "#212026",
-      "red":            "#e0211d",
+      "red":            "#c44f5c",
       "green":          "#20af81",
       "yellow":         "#cfc070",
       "blue":           "#4f97d7",
@@ -130,7 +130,7 @@
       "cyan":           "#2aa1ae",
       "white":          "#b4b7bd",
       "bright_black":   "#544a65",
-      "bright_red":     "#ce537a",
+      "bright_red":     "#b56777",
       "bright_green":   "#5cbcac",
       "bright_yellow":  "#d5c888",
       "bright_blue":    "#87afff",
@@ -177,7 +177,7 @@
       "define":     "#7810b0",
       "preproc":    "#801890",
       "precondit":  "#5820c0",
-      "exception":  "#a01038",
+      "exception":  "#8f4f5f",
       "character":  "#901860",
       "float":      "#3030c0",
       "special":    "#701888",
@@ -196,7 +196,7 @@
       "nontext":   "#b0a8c0"
     },
     "diagnostic": {
-      "error":   "#c81a16",
+      "error":   "#a84a46",
       "warning": "#488820",
       "info":    "#1050a8",
       "hint":    "#086068",
@@ -205,7 +205,7 @@
     "diff": {
       "added":   "#008050",
       "changed": "#488820",
-      "removed": "#a01038"
+      "removed": "#8f4f5f"
     },
     "yellow": {
       "base":   "#488820",
@@ -261,7 +261,7 @@
     },
     "terminal": {
       "black":          "#dcd8d0",
-      "red":            "#c81a16",
+      "red":            "#a84a46",
       "green":          "#008050",
       "yellow":         "#488820",
       "blue":           "#2b6cb3",
@@ -269,7 +269,7 @@
       "cyan":           "#1a7a84",
       "white":          "#3b3945",
       "bright_black":   "#c5b8ce",
-      "bright_red":     "#b52050",
+      "bright_red":     "#8f4f5f",
       "bright_green":   "#20a070",
       "bright_yellow":  "#589028",
       "bright_blue":    "#3d6cc0",
