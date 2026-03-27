@@ -102,7 +102,7 @@ Copy the relevant file to your terminal's theme/config directory:
 | Terminal | Dark | Light | Destination |
 |---|---|---|---|
 | Alacritty | `fluidlan.toml` | `fluidlan-light.toml` | `~/.config/alacritty/themes/` and `import` in config |
-| Kitty | `fluidlan.conf` | `fluidlan-light.conf` | `~/.config/kitty/themes/` and `include` in config |
+| Kitty | `fluidlan.conf` | `fluidlan-light.conf` | `~/.config/kitty/themes/` and `include themes/fluidlan.conf` in `~/.config/kitty/kitty.conf` |
 | tmux | `fluidlan.conf` | `fluidlan-light.conf` | `~/.config/tmux/themes/` and `source-file` in config |
 | WezTerm | `fluidlan.toml` | `fluidlan-light.toml` | `~/.config/wezterm/colors/` then `config.color_scheme = "Fluidlan Dark"` |
 | Windows Terminal | `fluidlan.json` | `fluidlan-light.json` | Add to `schemes` array in `settings.json` |
