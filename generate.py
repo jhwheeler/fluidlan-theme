@@ -547,10 +547,11 @@ class ThemeGenerator:
     def tmux(self):
         bg, fg, ui, s, st, d = self.bg, self.fg, self.ui, self.s, self.st, self.d
         non_selected_fg = fg["white"] if self.is_dark else st["nc_fg"]
+        tmux_filename = f'fluidlan{self.suffix}.conf'
         lines = [
             f'# {self.label} — tmux theme',
             '# Generated from palette.json — do not edit by hand.',
-            '# Run: source-file /path/to/fluidlan.conf', '',
+            f'# Run: source-file /path/to/{tmux_filename}', '',
             '# Core bar',
             f'set -g status-style "bg={st["bg"]},fg={st["fg"]}"',
             f'set -g status-interval 1',
