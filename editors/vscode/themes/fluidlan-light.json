@@ -91,7 +91,7 @@
     "dropdown.foreground": "#252028",
     "dropdown.border": "#aea4b8",
     "list.activeSelectionBackground": "#6838a0",
-    "list.activeSelectionForeground": "#2e2c36",
+    "list.activeSelectionForeground": "#dcd8d0",
     "list.hoverBackground": "#c4c0b8",
     "list.focusBackground": "#c4c0b8",
     "list.inactiveSelectionBackground": "#c4c0b8",
