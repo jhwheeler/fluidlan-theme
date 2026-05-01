@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygments-fluidlan"
+version = "0.1.0"
+description = "Fluidlan syntax style for Pygments (pgcli, bat, ipython, mkdocs, ...)."
+requires-python = ">=3.9"
+dependencies = ["Pygments>=2.0"]
+
+[project.entry-points."pygments.styles"]
+fluidlan = "pygments_fluidlan.dark:FluidlanStyle"
+fluidlan-light = "pygments_fluidlan.light:FluidlanLightStyle"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pygments_fluidlan*"]

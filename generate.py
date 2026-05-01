@@ -632,7 +632,9 @@ class ThemeGenerator:
             "dropdown.foreground": fg["base"],
             "dropdown.border": bg["accent"],
             "list.activeSelectionBackground": ui["cursor"],
-            "list.activeSelectionForeground": fg["white"],
+            # Use the base background color for selected-item text so the
+            # light purple selection remains readable in both variants.
+            "list.activeSelectionForeground": bg["base"],
             "list.hoverBackground": bg["overlay"],
             "list.focusBackground": bg["overlay"],
             "list.inactiveSelectionBackground": bg["overlay"],
@@ -1084,6 +1086,132 @@ class ThemeGenerator:
         lines.append('')
         self.write(f"terminals/ghostty/fluidlan{self.suffix}", "\n".join(lines) + "\n")
 
+    def pygments(self):
+        """Pygments syntax style — used by pgcli, bat, ipython, mkdocs, etc.
+
+        Emits one module per variant under editors/pygments/pygments_fluidlan/.
+        Install with: pip install --user -e editors/pygments
+        """
+        s, fg, bg, ui = self.s, self.fg, self.bg, self.ui
+        variant_mod = "dark" if self.is_dark else "light"
+        class_name = "FluidlanStyle" if self.is_dark else "FluidlanLightStyle"
+        style_name = f"fluidlan{self.suffix}"
+
+        # (token_path, style_str). Order = output order.
+        mapping = [
+            ("Token",                 fg["base"]),
+            ("Comment",               f"italic {s['comment']}"),
+            ("Comment.Preproc",       s["preproc"]),
+            ("Comment.PreprocFile",   s["precondit"]),
+            ("Comment.Special",       f"bold italic {s['comment']}"),
+
+            ("Keyword",               f"bold {s['keyword']}"),
+            ("Keyword.Constant",      s["constant"]),
+            ("Keyword.Declaration",   f"bold {s['keyword']}"),
+            ("Keyword.Namespace",     f"bold {s['macro']}"),
+            ("Keyword.Pseudo",        s["label"]),
+            ("Keyword.Reserved",      f"bold {s['keyword']}"),
+            ("Keyword.Type",          s["type"]),
+
+            ("Name",                  fg["base"]),
+            ("Name.Attribute",        s["property"]),
+            ("Name.Builtin",          s["function"]),
+            ("Name.Builtin.Pseudo",   s["constant"]),
+            ("Name.Class",            f"bold {s['type']}"),
+            ("Name.Constant",         s["constant"]),
+            ("Name.Decorator",        s["macro"]),
+            ("Name.Entity",           s["label"]),
+            ("Name.Exception",        f"bold {s['exception']}"),
+            ("Name.Function",         s["function"]),
+            ("Name.Function.Magic",   s["function"]),
+            ("Name.Label",            s["label"]),
+            ("Name.Namespace",        s["type"]),
+            ("Name.Other",            s["identifier"]),
+            ("Name.Property",         s["property"]),
+            ("Name.Tag",              s["tag"]),
+            ("Name.Variable",         s["identifier"]),
+            ("Name.Variable.Class",   s["identifier"]),
+            ("Name.Variable.Global",  s["identifier"]),
+            ("Name.Variable.Instance", s["identifier"]),
+            ("Name.Variable.Magic",   s["label"]),
+
+            ("Literal",               s["number"]),
+            ("Literal.Date",          s["string"]),
+
+            ("String",                s["string"]),
+            ("String.Affix",          s["string"]),
+            ("String.Backtick",       s["string"]),
+            ("String.Char",           s["character"]),
+            ("String.Delimiter",      s["delimiter"]),
+            ("String.Doc",            f"italic {s['comment']}"),
+            ("String.Double",         s["string"]),
+            ("String.Escape",         s["specialchar"]),
+            ("String.Heredoc",        s["string"]),
+            ("String.Interpol",       s["function"]),
+            ("String.Other",          s["string"]),
+            ("String.Regex",          s["delimiter"]),
+            ("String.Single",         s["string"]),
+            ("String.Symbol",         s["character"]),
+
+            ("Number",                s["number"]),
+            ("Number.Bin",            s["number"]),
+            ("Number.Float",          s["float"]),
+            ("Number.Hex",            s["number"]),
+            ("Number.Integer",        s["number"]),
+            ("Number.Integer.Long",   s["number"]),
+            ("Number.Oct",            s["number"]),
+
+            ("Operator",              s["operator"]),
+            ("Operator.Word",         f"bold {s['keyword']}"),
+            ("Punctuation",           s["delimiter"]),
+
+            ("Generic",               fg["base"]),
+            ("Generic.Deleted",       s["exception"]),
+            ("Generic.Emph",          "italic"),
+            ("Generic.Error",         s["exception"]),
+            ("Generic.Heading",       f"bold {s['macro']}"),
+            ("Generic.Inserted",      s["string"]),
+            ("Generic.Output",        fg["muted"]),
+            ("Generic.Prompt",        f"bold {s['keyword']}"),
+            ("Generic.Strong",        "bold"),
+            ("Generic.Subheading",    f"bold {s['property']}"),
+            ("Generic.Traceback",     s["exception"]),
+
+            ("Error",                 f"border:{s['exception']} {s['exception']}"),
+        ]
+
+        top_level = sorted({m[0].split('.')[0] for m in mapping})
+
+        lines = [
+            f'"""{self.label} — Pygments style.',
+            "",
+            "Generated from palette.json — do not edit by hand.",
+            "Run: python3 generate.py",
+            '"""',
+            "",
+            "from pygments.style import Style",
+            f"from pygments.token import {', '.join(top_level)}",
+            "",
+            "",
+            f"class {class_name}(Style):",
+            f'    name = "{style_name}"',
+            f'    background_color = "{bg["base"]}"',
+            f'    highlight_color = "{ui["selection"]}"',
+            "",
+            "    styles = {",
+        ]
+        key_w = max(len(m[0]) for m in mapping) + 1
+        for token_path, style_str in mapping:
+            key = f"{token_path}:".ljust(key_w + 1)
+            lines.append(f'        {key} "{style_str}",')
+        lines.append("    }")
+        lines.append("")
+
+        self.write(
+            f"editors/pygments/pygments_fluidlan/{variant_mod}.py",
+            "\n".join(lines),
+        )
+
     # -- run all -------------------------------------------------------------
 
     def generate_all(self):
@@ -1093,6 +1221,7 @@ class ThemeGenerator:
         self.helix()
         self.zed()
         self.vscode()
+        self.pygments()
         self.alacritty()
         self.kitty()
         self.tmux()
